@@ -1,30 +1,38 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import Touchable from 'react-native-platform-touchable';
 
-const ChatItem = ({key, profile, name, lastmessage}) => {
+const ChatItem = ({profile, name, lastmessage, onClick}) => {
   return (
-    <View
-      key={{key}}
-      style={chat.container}
-    >
-      <Image
-        style={chat.profile}
-        source={{uri: profile}}
-      />
-      <View>
-        <Text style={chat.name}> { name } </Text>
-        <Text> { lastmessage} </Text>
+    <Touchable
+      onPress={onClick}
+      background={Touchable.Ripple('blue')}>
+      <View
+        style={chat.container}
+      >
+        <Image
+          style={chat.profile}
+          source={{uri: profile}}
+        />
+        <View>
+          <Text style={chat.name}> { name } </Text>
+          <Text> { lastmessage} </Text>
+        </View>
       </View>
-    </View>
+    </Touchable>
   );
 }
 
+ChatItem.defaultProps = {
+  onClick: () => null,
+};
+
 ChatItem.propTypes = {
-  key: PropTypes.number.isRequired,
   profile: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   lastmessage: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
 };
 
 const chat = StyleSheet.create({

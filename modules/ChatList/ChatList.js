@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View} from 'react-native';
 import { data } from '../../helpers/mockData';
 import ChatItem from '../../components/ChatItem';
 
@@ -10,7 +10,6 @@ class ChatList extends Component {
 
   constructor(props){
     super(props);
-
     this.state = {
       contacts: data.contacts,
       chats: data.chats,
@@ -19,6 +18,7 @@ class ChatList extends Component {
 
   renderChatPreviews = () => {
     const { contacts, chats } = this.state;
+    const { navigate } = this.props.navigation;
 
     const userIds = Object.keys(chats);
     const chatPreviews = userIds.map((userId) => {
@@ -31,6 +31,7 @@ class ChatList extends Component {
           name={contact.name}
           profile={contact.profile}
           lastmessage={chats[userId][lastIndex].content}
+          onClick={() => navigate('Chat', { user: contact })}
         />
       );
     });
@@ -50,10 +51,5 @@ class ChatList extends Component {
     );
   }
 }
-
-
-
-const style = StyleSheet.create({
-});
 
 export default ChatList;

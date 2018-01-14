@@ -3,12 +3,18 @@ import { View, StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import ChatList from './modules/ChatList';
+import Chat from './modules/Chat';
 
 const Routes = {
   ChatList: {
      name: 'ChatList screen',
      description: 'List the conversations with other users',
      screen: ChatList
+  },
+  Chat: {
+     name: 'Chat screen',
+     description: 'Screen to chat with someone',
+     screen: Chat
   }
 }
 
@@ -42,7 +48,9 @@ const AppNavigator = StackNavigator(
       },
       headerTitleStyle: {
         color: 'white',
-      }
+      },
+      headerTintColor: 'white',
+      headerBackTitle: null,
     }),
     cardStyle: { backgroundColor: '#F9F9FB' },
   }
