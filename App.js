@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 
 import ChatList from './modules/ChatList';
 import Chat from './modules/Chat';
+import User from './modules/User';
 
 const Routes = {
   ChatList: {
@@ -15,6 +16,11 @@ const Routes = {
      name: 'Chat screen',
      description: 'Screen to chat with someone',
      screen: Chat
+  },
+  User: {
+     name: 'User screen',
+     description: 'Screen to see your profile',
+     screen: User
   }
 }
 

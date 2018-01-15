@@ -1,12 +1,20 @@
 import React, {Component} from 'react';
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, Image} from 'react-native';
 import { data } from '../../helpers/mockData';
 import ChatItem from '../../components/ChatItem';
+import Touchable from 'react-native-platform-touchable';
 
 class ChatList extends Component {
-  static navigationOptions = {
-    title: 'Chat List'
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Chat List',
+    headerRight: 
+      <Touchable onPress={() => navigation.navigate('User')}>
+        <Image
+          source={require('./user.png')}
+          style={[{height: 24, width: 24, marginRight: 16}]}
+        />
+      </Touchable>
+  });
 
   constructor(props){
     super(props);
