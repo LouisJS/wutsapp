@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, TextInput, ScrollView, Keyboard, Platform, Dimensions} from 'react-native';
 import { data } from '../../helpers/mockData';
+import SocketIOClient from 'socket.io-client';
 
 class Chat extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -13,15 +14,29 @@ class Chat extends Component {
 
     this.state = {
       me: data.me,
-      chats: data.chats[user.id],
       recipient: user,
       text: null,
       keyboardVisible: false,
       keyboardHeight: 0,
     }
+
+    this.socket = SocketIOClient('http://localhost:3000');
+    this.socket.on('message', this.onReceivedMessage);
+
+    this.initMetadata();
+  }
+
+  initMetadata = () => {
+    const { me, recipient} = this.state;
+
+    this.socket.emit('loadConversation', {
+      me: me,
+      recipient: recipient
+    });
   }
 
   componentWillMount () {
+    const { chats, recipient } = this.state;
     let eventType = 'Did';
 
     if (Platform.OS === 'ios') {
@@ -30,6 +45,10 @@ class Chat extends Component {
 
     this.keyboardDidShowListener = Keyboard.addListener(`keyboard${eventType}Show`, this._keyboardDidShow);
     this.keyboardDidHideListener = Keyboard.addListener(`keyboard${eventType}Hide`, this._keyboardDidHide);
+
+    if (!chats) {
+      this.setState({chats: data.chats[recipient.id] });
+    }
     
   }
 
@@ -87,6 +106,18 @@ class Chat extends Component {
     };
 
     this.setState({text: '', chats: [...chats, newMessage]});
+    this.socket.emit('message', newMessage);
+  }
+
+  // Event listeners
+  /**
+   * When the server sends a message to this.
+   */
+  onReceivedMessage = (message) => {
+    const {chats} = this.state;
+    console.log('Received', message);
+
+    this.setState({chats: [...chats, message]});
   }
 
   render() {
