@@ -6,8 +6,8 @@ export const data = {
   "me": {
     "id": 'user1',
     "phone": "0678233041",
-    "name": "Emilia",
-    "profile": "https://res.cloudinary.com/donglyhya/image/upload/v1515857706/user1_jwft1x.jpg"
+    "name": "Ragnar",
+    "profile": "https://res.cloudinary.com/donglyhya/image/upload/v1516041607/eHSUOW7b_400x400_ho6plu.jpg"
   },
   "contacts": [
     {"id": 'user2', "phone": "0634234532", "name": "Julien",  "profile": "https://res.cloudinary.com/donglyhya/image/upload/v1515857705/user3_tgy9bd.jpg"},
