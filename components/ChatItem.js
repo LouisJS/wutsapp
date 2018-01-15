@@ -17,7 +17,7 @@ const ChatItem = ({profile, name, lastmessage, onClick}) => {
         />
         <View>
           <Text style={chat.name}> { name } </Text>
-          <Text> { lastmessage} </Text>
+          <Text style={{maxWidth: 200}} numberOfLines={1}> { lastmessage} </Text>
         </View>
       </View>
     </Touchable>
