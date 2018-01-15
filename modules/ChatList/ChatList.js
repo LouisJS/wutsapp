@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import { data } from '../../helpers/mockData';
 import ChatItem from '../../components/ChatItem';
 
@@ -45,9 +45,9 @@ class ChatList extends Component {
 
   render() {
     return (
-      <View>
+      <ScrollView>
         { this.renderChatPreviews() }
-      </View>
+      </ScrollView>
     );
   }
 }
