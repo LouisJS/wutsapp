@@ -161,13 +161,10 @@ const style = StyleSheet.create({
     padding: 5,
   },
   sent: {
-    
     alignSelf: 'flex-end',
     backgroundColor: '#DCF8C6',
-    
   },
   received: {
-    
     alignSelf: 'flex-start',
     backgroundColor: 'white',
   }
